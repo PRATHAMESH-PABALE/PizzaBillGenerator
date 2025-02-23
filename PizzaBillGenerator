@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class PizzaBillGenerator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prices for different pizzas
+        int vegPizzaPrice = 200;
+        int nonVegPizzaPrice = 300;
+        int deluxeVegPizzaPrice = 400;
+        int deluxeNonVegPizzaPrice = 500;
+        int extraCheesePrice = 50;
+        int extraToppingsPrice = 70;
+
+        // Display menu
+        System.out.println("Welcome to Pizza Shop!");
+        System.out.println("Select your Pizza type:");
+        System.out.println("1. Veg Pizza - ₹" + vegPizzaPrice);
+        System.out.println("2. Non-Veg Pizza - ₹" + nonVegPizzaPrice);
+        System.out.println("3. Deluxe Veg Pizza - ₹" + deluxeVegPizzaPrice);
+        System.out.println("4. Deluxe Non-Veg Pizza - ₹" + deluxeNonVegPizzaPrice);
+
+        // Taking user input
+        System.out.print("Enter your choice (1-4): ");
+        int choice = scanner.nextInt();
+        int totalPrice = 0;
+
+        boolean isDeluxe = false;
+
+        switch (choice) {
+            case 1:
+                totalPrice = vegPizzaPrice;
+                break;
+            case 2:
+                totalPrice = nonVegPizzaPrice;
+                break;
+            case 3:
+                totalPrice = deluxeVegPizzaPrice;
+                isDeluxe = true;
+                break;
+            case 4:
+                totalPrice = deluxeNonVegPizzaPrice;
+                isDeluxe = true;
+                break;
+            default:
+                System.out.println("Invalid choice! Please select a valid pizza.");
+                return;
+        }
+
+        // Asking for extra cheese and toppings if not a deluxe pizza
+        if (!isDeluxe) {
+            System.out.print("Do you want extra cheese? (yes/no): ");
+            String cheeseChoice = scanner.next();
+            if (cheeseChoice.equalsIgnoreCase("yes")) {
+                totalPrice += extraCheesePrice;
+            }
+
+            System.out.print("Do you want extra toppings? (yes/no): ");
+            String toppingsChoice = scanner.next();
+            if (toppingsChoice.equalsIgnoreCase("yes")) {
+                totalPrice += extraToppingsPrice;
+            }
+        }
+
+        // Printing final bill
+        System.out.println("\n------ Final Bill ------");
+        System.out.println("Total Amount: ₹" + totalPrice);
+        System.out.println("Thank you for ordering from Pizza Shop!");
+
+        scanner.close();
+    }
+}
